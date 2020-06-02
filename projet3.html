@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="projet3.css">
+		<title>LocaBike</title>
+</head>
+<body>
+	<h1><strong>LOCABIKE</strong></h1>
+	<h2><strong>Louez un vélo en toute simplicité !</strong></h2>
+
+	<ul>
+		<li><a href="#1"><strong>Présentation</strong></a></li>
+		<li><a href="#2"><strong>Réservation</strong></a></li>
+		<li><a href="#3"><strong>Contact</strong></a></li>
+    </ul>
+
+	<div id="slider">
+		<div class="slides fade">
+			<div class="numbertext"> 1 / 3</div>
+			<img src="velo1.jpg" alt="Vélo" style="width: 100%">
+			<div class="text"><strong> Louez un Vélo en quelques instants !</strong></div>
+		</div>
+		<div class="slides fade">
+			<div class="numbertext"> 2 / 3</div>
+			<img src="velo2.jpg" alt="Vélo" style="width: 100%">
+			<div class="text"><strong> Choissisez la durée de votre location !</strong></div>
+		</div>
+		<div class="slides fade">
+			<div class="numbertext"> 3 / 3</div>
+			<img src="velo3.jpg" alt="Vélo" style="width: 100%">
+			<div class="text"><strong> Visitez la ville à votre rythme !</strong> </div>
+		</div>
+	</div>
+	<br>
+	<div style="text-align: center"> 
+		<span class="dot"></span>
+		<span class="dot"></span>
+		<span class="dot"></span>
+	</div>
+	<div class="boutons">
+		<button id="pause"><strong>Pause</strong></button>
+		<button id="play"><strong>Play</strong></button>
+		<br>
+		<div class="fleches">
+			<button class="btn_gauche"> <div class="flecheg"></div></button>
+			<button class="btn_droite"> <div class="fleched"></div></button>
+		</div>
+	</div> 
+
+
+
+
+	<script type="text/javascript" src="jquery-3.4.1.js"></script> 
+	<script>
+var slideIndex = 0;
+var intervalId = setInterval(showSlides, 5000);
+function pauseslide(){
+	clearInterval(intervalId);
+}
+document.getElementById('pause').addEventListener('click', function(){
+pauseslide()
+});
+function playslides(){
+intervalId = setInterval(showSlides, 5000);
+}
+document.getElementById('play').addEventListener('click' , function(){
+	playslides()
+});
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("slides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  }
+
+</script>
+
+<h3><strong>Trouvez facilement un vélo dispobible parmis nos nombreuses stations !</strong></h3>
+	<div id="map"></div>
+	<script>
+		function initMap() {
+			var rouen = {lat : 49.4431, lng : 1.0993 };
+			var map = new google.maps.Map(
+				document.getElementById('map'), {zoom: 15, center : rouen});
+			var marker = new google.maps.Marker({position : rouen, map:map});
+		}
+	</script>
+	<script async defer 
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrdAdVaiQ6ynPuZwGQ251q0Ts_3K3CwEA&callback=initMap"
+	type="text/javascript"></script>
+</body>
+</html>
